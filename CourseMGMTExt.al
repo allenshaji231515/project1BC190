@@ -1,5 +1,6 @@
 tableextension 50110 MyExtension extends "Customer"
 {
+    LookupPageId = "Item Lookup";
     fields
     {
         field(50110; Facebook; Text[50])
@@ -18,6 +19,13 @@ tableextension 50110 MyExtension extends "Customer"
         {
             DataClassification = ToBeClassified;
         }
+        modify("Country/Region Code"){
+            TableRelation = Resource;
+        }
+        modify("Address 2"){
+            TableRelation = Customer;
+        }
 
     }
+
 }

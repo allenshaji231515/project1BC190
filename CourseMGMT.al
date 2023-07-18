@@ -4,9 +4,10 @@ table 50105 "Course Management"
     
     fields
     {
-        field(10;"Code"; Code[10])
+        field(10;"Code"; Integer)
         {
             DataClassification = ToBeClassified;
+            AutoIncrement = true;
             
         }
         field(20; "Name"; Text[30])
@@ -43,10 +44,17 @@ table 50105 "Course Management"
         {
             DataClassification = ToBeClassified;
         }
-        field(100; "Intructor Code"; Code[20])
+        field(100; "Instructor Code"; Code[20])
         {
             DataClassification = ToBeClassified;
             TableRelation ="Resource" Where (Type=CONST(Person));
+        }
+        field(120; "Instructor Name"; Text[100])
+        {
+            
+            CalcFormula = lookup (Resource.Name where ("No."=field("Instructor Code")));
+            Editable = false;
+            FieldClass = FlowField;
         }
     }
     
@@ -55,8 +63,9 @@ table 50105 "Course Management"
         key(Key1; "Code")
         {
             Clustered = true;
+            
         }
-        key(SecondaryKey1; "Intructor Code")
+        key(SecondaryKey1; "Instructor Code")
         {
            
         }
